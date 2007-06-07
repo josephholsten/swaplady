@@ -1,0 +1,37 @@
+<?php echo $this->render('header.phtml'); ?>
+<form action="/items/update/<?php echo $this->item->id ?>"
+      enctype="multipart/form-data" method="post">
+    <ul>
+        <li><label>Title:
+            <?php echo $this->formText('item[name]', $this->item->name) ?>
+        </label></li>
+        <li><label>Swapbucks:
+            <?php echo $this->formText('item[points]', $this->item->points) ?>
+        </label></li>
+        <li><label>Image:
+            <img src="/image/show/<?php echo $this->item->image_id ?>">
+            <?php echo $this->formFile('image') ?>
+        </label></li>
+        <li><label>Description:
+            <?php echo $this->formText('item[description]', $this->item->description) ?>
+        </label></li>
+        <li><label>Weight:
+            <?php echo $this->formText('item[weight]', $this->item->weight) ?>
+        </label></li>
+        <li><label>Keywords:
+            <?php echo $this->formText('tags', $this->tags)?>
+        </label></li>
+        <li>
+            <?php echo $this->formHidden('item[id]', $this->item->id)?>
+            <?php echo $this->formSubmit('Update', 'Update') ?>
+        </li>
+    </ul>
+</form>
+
+<h2>Popular Tags</h2>
+<p>
+    <?php foreach ($this->toptags as $tag) { ?>
+        <a class="tag"><?php echo $tag['name'] ?></a>
+    <?php } ?>
+</p>
+<?php echo $this->render('footer.phtml'); ?>

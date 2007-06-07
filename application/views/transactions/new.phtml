@@ -1,0 +1,85 @@
+<?php echo $this->render('header.phtml') ?>
+<h1><?php echo $this->user->name ?>'s Shopping Bag</h1>
+
+<table>
+    <tr>
+        <th>Item</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Delivery</th>
+        <th>Shipping Charge</th>
+        <th>Total</th>
+        <th>Transaction Fee</th>
+    </tr>
+    <?php foreach($this->items as $item) { ?>
+        <tr>
+            <td>
+                <?php if ($item['title'] == 'Swapbucks') { ?>
+                    <?php echo $item['title'] ?>
+                <?php } else {?>
+                    <a href="/items/show/<?php echo $item['item_id'] ?>">
+                        <?php echo $item['title'] ?>
+                    </a>
+                <?php } ?>
+            </td>
+            <td><?php echo $item['quantity'] ?></td>
+            <td><?php echo $item['price'] ?></td>
+            <td>
+            <?php if (isset($item['shipping_method'])) {
+				if (0 == $item['shipping_method']) { ?>
+					Local Pickup
+				<?php } else { ?>
+					Shipping
+			<?php }} ?>
+            </td>
+            <td><?php echo $item['shipping_charge'] ?></td>
+            <td><?php echo $item['total'] ?></td>
+            <td>$<?php echo $item['transFee'] ?></td>
+            <?php if (!empty($item['line_item_id'])) { ?>
+            <td><form action="/lineitems/destroy/<?php echo $item['line_item_id'] ?>" method="POST">
+                <?php echo $this->formSubmit('remove', 'Remove Item') ?>
+            </form></td>
+            
+            
+            <td><form action="/lineitems/update/<?php echo $item['line_item_id'] ?>" method="POST">
+			<?php
+            	echo $this->formHidden('user_id', $item['user_id']);
+            	echo $this->formHidden('item_id', $item['item_id']);
+            	if (0 == $item['shipping_method']) {
+					echo $this->formHidden('shipping', 1);
+					echo $this->formSubmit('delivery', 'Ship it to Me');
+            	} else {
+					echo $this->formHidden('shipping', 0);
+					echo $this->formSubmit('delivery', 'I\'ll Pick it Up');
+            	}
+            ?>
+            </form></td>
+            <?php } ?>
+            
+        </tr>
+    <?php } ?>
+    <tr>
+        <td>Total</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td><?php echo $this->swapbucksTotal ?></td>
+        <td>$<?php echo $this->transactionTotal ?></td>
+    </tr>
+</table>
+<p>Account Balance Before Purchase: <?php echo $this->user->balance ?></p>
+<?php if (!empty($this->swapbucksToBuy)) { ?>
+<p>Purchased SwapBucks:	<?php echo $this->swapbucksToBuy ?></p>
+<?php } ?>
+<p>Account Balance After Purchase:	<?php echo $this->finalBalance ?></p>
+
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+    <input type="hidden" name="cmd" value="_s-xclick" />
+    <input type="submit" value="Swap Now!" />
+    <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----
+<?php echo $this->encryptedButton ?>
+
+-----END PKCS7-----" />
+</form>
+<?php echo $this->render('footer.phtml') ?>

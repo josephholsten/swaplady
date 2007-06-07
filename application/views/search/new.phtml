@@ -1,0 +1,7 @@
+<?php echo $this->render('header.phtml') ?>
+<h1>Search for an Item</h1>
+<form action="/search/show">
+    <?php echo $this->formText('q') ?>
+    <?php echo $this->formSubmit('Search', 'Search') ?>
+</form>
+<?php echo $this->render('footer.phtml') ?>

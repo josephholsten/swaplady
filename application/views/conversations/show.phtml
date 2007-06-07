@@ -1,0 +1,20 @@
+<?php echo $this->render('header.phtml') ?>
+
+<p><a href="/items/show/<?php echo $this->item->id ?>">Return to <?php echo $this->item->name ?></a></p>
+
+<?php foreach ($this->messages as $message) { ?>
+	<p>
+		<?php echo $message['body'] ?>
+		
+		<em>Posted by <?php echo $message['user']['name'] ?> on <?php echo $message['created_on'] ?></em>
+	</p>
+<?php } ?>
+
+<form action="/message/create" method="post">
+	<?php echo $this->formHidden('message[conversation_id]', $this->conversation->id) ?>
+	<?php echo $this->formHidden('message[author_id]', $this->session->user_id); ?>
+	<?php echo $this->formTextarea('message[body]') ?>
+	<?php echo $this->formSubmit('add', 'Add message'); ?>
+</form>
+
+<?php echo $this->render('footer.phtml') ?>

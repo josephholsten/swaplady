@@ -1,0 +1,9 @@
+<form action="/session/create" method="post">
+    <label>Username:
+        <?php echo $this->formText('user[username]') ?>
+    </label>
+    <label>Password:
+        <?php echo $this->formPassword('user[password]') ?>
+    </label>
+    <?php echo $this->formSubmit('login', 'Login') ?>
+</form>

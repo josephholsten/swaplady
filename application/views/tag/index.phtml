@@ -1,0 +1,8 @@
+<?php echo $this->render('header.phtml') ?>
+<h1>Keywords</h1>
+<ul>
+<?php foreach($this->tags as $tag) { ?>
+    <li><a href="/tag/<?php echo $tag['name'] ?>"><?php echo $tag['name'] ?> (<?php echo $tag['count'] ?>)</a></li>
+<?php } ?>
+</ul>
+<?php echo $this->render('footer.phtml') ?>

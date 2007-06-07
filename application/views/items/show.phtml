@@ -1,0 +1,61 @@
+<?php echo $this->render('header.phtml'); ?>
+<h1><?php echo $this->item->name ?></h1>
+<?php if ($this->item->sold) { ?>
+    <h2>SOLD</h2>
+<?php } ?>
+<img src="/image/show/<?php echo $this->item->image_id ?>">
+<ul>
+    <li>Posted by: <?php echo $this->owner->username ?></li>
+    <li>Location: <?php echo $this->owner->city .", ". $this->owner->state ?></li>
+    <li>Item Price: <?php echo $this->item->points ?> SwapBucks</li>
+    <li>Shipping: <a href="/shipping.html" target="#"><?php echo $this->shipping ?> SwapBucks</a></li>
+    <li>Total: <?php echo $this->total ?></li>
+</ul>
+<p>$1.00 Transaction fee plus the required number of SwapBucks</p>
+<?php if($this->tags->exists()) { ?>
+    <h2>Keywords</h2>
+    <ul>
+        <?php foreach($this->tags as $tag) { ?>
+            <li><a href="/tag/<?php echo $tag->name ?>"><?php echo $tag->name ?></a></li>
+        <?php } ?>
+    </ul>
+<?php } ?>
+<p><?php echo $this->item->description ?></p>
+<?php if ($this->owner->id == $this->session->user_id) { ?>
+    <ul>
+        <li><a href="/items/edit/<?php echo $this->item->id ?>">Edit</a></li>
+        <li><form action="/items/destroy" method="POST">
+            <?php echo $this->formHidden('item[id]', $this->item->id) ?>
+            <?php echo $this->formSubmit('destroy', 'Delete') ?>
+        </form></li>
+    </ul>
+    
+    <?php if (!empty($this->conversations)) { ?>
+		<h2>Conversations</h2>
+		<ul>
+		<?php foreach($this->conversations as $conversation) { ?>
+			<li><a href="/conversations/show/<?php echo $conversation['id'] ?>">Conversation with <?php echo $conversation['user']['name'] ?></a></li>
+		<?php } ?>
+		</ul>    
+    <?php } ?>
+
+<?php } else { ?>
+    <ul>
+        <li><a href="/lineitems/create/<?php echo $this->item->id ?>">Add to Shopping Bag</a></li>
+    </ul>
+    
+	<?php if (!empty($this->conversation)) { ?>
+		<p><a href="/conversations/show/<?php echo $this->conversation->id ?>">Your conversation with the owner</a></p>    
+    <?php } else { ?>
+    	<form action="/message/create" method="post">
+			<?php echo $this->formHidden('conversation[user_id]', $this->session->user_id) ?>
+			<?php echo $this->formHidden('conversation[item_id]', $this->item->id) ?>
+			<?php echo $this->formHidden('message[author_id]', $this->session->user_id) ?>
+			<?php echo $this->formTextarea('message[body]') ?>
+			<?php echo $this->formSubmit('add', 'Start a conversation'); ?>
+		</form>
+    <?php } ?>
+<?php } ?>
+
+
+<?php echo $this->render('footer.phtml'); ?>

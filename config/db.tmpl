@@ -1,0 +1,21 @@
+<?php
+require_once 'Zend/Db.php';
+
+/*
+ * Modify this file and place your copy in config/db.php
+ */
+
+// Fill this with you database server credentials
+$dbParams = array(
+   'host' => 'localhost',
+   'username' => 'root',
+   'password' => ''
+);
+
+// Fill these with the respective databases
+$development  = $dbParams + array('dbname' => 'swaplady_development');
+$production   = $dbParams + array('dbname' => 'swaplady_production');
+$test         = $dbParams + array('dbname' => 'swaplady_test');
+
+$db = Zend_Db::factory('PDO_MYSQL', $development);
+Zend::register('db', $db);

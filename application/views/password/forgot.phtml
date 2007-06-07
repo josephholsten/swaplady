@@ -1,0 +1,17 @@
+<html><head><title></title></head>
+<body>
+
+    <h1><a href="/">Swaplady</a></h1>
+
+    <?php if (isset($this->flash->notice)) { ?>
+        <p><?php echo $this->flash->notice ?></p>
+    <?php } ?>
+
+    <form action="/password/send" method="post">
+        <label>Email:
+            <?php echo $this->formText('email') ?>
+        </label>
+        <?php echo $this->formSubmit('send', 'Email my password') ?>
+    </form>
+
+</body></html>

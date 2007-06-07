@@ -1,0 +1,35 @@
+<?php echo $this->render('header.phtml'); ?>
+<form action="/items/create"
+      enctype="multipart/form-data" method="post">
+    <ul>
+        <li><label>Title:
+            <?php echo $this->formText('item[name]') ?>
+        </label></li>
+        <li><label>Swapbucks:
+            <?php echo $this->formText('item[points]') ?>
+        </label></li>
+        <li><label>Image:
+            <?php echo $this->formFile('image') ?>
+        </label></li>
+        <li><label>Description:
+            <?php echo $this->formText('item[description]') ?>
+        </label></li>
+        <li><label>Weight:
+            <?php echo $this->formText('item[weight]') ?>
+        </label></li>
+        <li><label>Keywords:
+            <?php echo $this->formText('tags') ?>
+        </label></li>
+        <li>
+            <?php echo $this->formSubmit('Post') ?>
+        </li>
+    </ul>
+</form>
+
+<h2>Popular Tags</h2>
+<p>
+    <?php foreach ($this->toptags as $tag) { ?>
+        <a class="tag"><?php echo $tag['name'] ?></a>
+    <?php } ?>
+</p>
+<?php echo $this->render('footer.phtml'); ?>

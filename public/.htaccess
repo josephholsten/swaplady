@@ -1,0 +1,10 @@
+RewriteEngine on
+# If this is accessed by an apache alias,
+# you'll need to set RewriteBase
+#RewriteBase /swaplady/
+RewriteRule ^$ index.html [QSA]
+RewriteRule ^([^.]+)$ $1.html [QSA]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteRule ^(.*)$ dispatch.php [QSA,L]
+

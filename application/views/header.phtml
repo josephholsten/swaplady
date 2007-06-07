@@ -1,0 +1,24 @@
+<html>
+<head>
+  <title><?php echo $this->title ?></title>
+  <script src="/javascripts/swaplady.js"></script>
+</head>
+<body>
+    <h1><a href="/">Swaplady</a></h1>
+    <?php if (isset($this->flash->notice)) { ?>
+        <p><?php echo $this->flash->notice ?></p>
+    <?php } ?>
+    
+    <?php if (isset($this->session->user_id)) {
+        echo "<a href=\"/user/show/{$this->session->user_id}\">My Account</a>";
+        echo $this->render('_logout.phtml');
+        echo '<a href="/transactions/new">Shopping Bag</a>';
+    } else {
+	echo '<a href="/user/new">Sign Up</a>';
+        echo $this->render('_login.phtml');
+    } ?>
+    
+    <form action="/search/show">
+        <?php echo $this->formText('q') ?>
+        <?php echo $this->formSubmit('Search', 'Search') ?>
+    </form>

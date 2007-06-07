@@ -1,0 +1,39 @@
+    <ul>
+        <li><label>Username:
+            <?php echo $this->formText('user[username]', $this->user['username']) ?>
+        </label></li>
+        <li><label>Password:
+            <?php echo $this->formPassword('user[password]', $this->user['password']) ?>
+        </label></li>
+        <li><label>Pasword Confirmation:
+            <?php echo $this->formPassword('user[password_confirm]', $this->user['password_confirm']) ?>
+        </label></li>
+        <li><label>Email:
+            <?php echo $this->formText('user[email]', $this->user['email']) ?>
+        </label></li>
+        <li><label>Email Confirmation:
+            <?php echo $this->formText('user[emailConfirm]', $this->user['emailConfirm']) ?>
+        </label></li>
+        <li><label>Name:
+            <?php echo $this->formText('user[name]', $this->user['name']) ?>
+        </label></li>
+        <li><label>Address:
+            <?php echo $this->formText('user[address]', $this->user['address']) ?>
+        </label></li>
+        <li><label>City:
+            <?php echo $this->formText('user[city]', $this->user['city']) ?>
+        </label></li>
+        <li><label>State:
+        	<?php echo $this->formSelect('user[state]', $this->user['state'], null, $this->states) ?>
+        	<?php echo $this->states[0] ?>
+        </label></li>
+        <li><label>Zip Code:
+            <?php echo $this->formText('user[zip_code]', $this->user['zip_code']) ?>
+        </label></li>
+        <li><label>Country:
+            <?php echo $this->formText('user[country]', $this->user['country']) ?>
+        </label></li>
+        <li><label><?php echo $this->formCheckbox('terms', $this->terms) ?>
+            I have read and agree to the <a href="/terms.html">SwapLady Terms and Conditions</a>
+        </label></li>
+    <ul>

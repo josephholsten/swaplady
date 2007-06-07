@@ -1,0 +1,10 @@
+<?php echo $this->render('header.php') ?>
+<form action="create" method="post" enctype="multipart/form-data">
+    <p>
+    <label>Image:
+        <?php echo $this->formFile('image') ?>
+    <label>
+    </p>
+    <?php echo $this->formSubmit('Create')?>
+</form>
+<?php echo $this->render('footer.php') ?>

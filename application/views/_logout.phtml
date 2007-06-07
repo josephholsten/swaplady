@@ -1,0 +1,4 @@
+<form action="/session/destroy" method="post">
+    <?php echo $this->formHidden("user_id", $this->session->user_id) ?>
+    <?php echo $this->formSubmit('Logout', "Logout") ?>
+</form>

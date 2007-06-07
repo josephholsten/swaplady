@@ -1,0 +1,15 @@
+Write testcase for RewriteRoute redirect loop when a route is named default, even after removeDefaultRoutes().
+
+investigate
+    Controller_Action->__call($argument, $arguments)
+    Controller_Action->noRouteAction()
+    __autoload($class) {Zend::loadClass(($class));}
+    Zend_Controller_ActionTest
+    Zend_ViewTest
+
+My Account
+Add Category  maybe a drop-down listing
+Need to add a way to have posting valid for 30 days and then get the option to repost.
+Add check box Willing to ship outside of local country
+
+Zend::loadClass -> Zend_Loader::loadClass
