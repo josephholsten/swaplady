@@ -72,7 +72,7 @@ class SessionController extends ApplicationController
             }
 
         } else {
-            $this->flash->notice = 'Invalid username/password combination. Perhaps you\'d like to <a href="/user/new">register</a>? Or would you like us to <a href="/swaplady/password/forgot">email your password to you</a>?';
+            $this->flash->notice = 'Invalid username/password combination. Perhaps you\'d like to <a href="/user/new">register</a>? Or would you like us to <a href="/password/forgot">email your password to you</a>?';
             $this->flash->keep = TRUE;
             $this->_redirect('/session/new');
         }

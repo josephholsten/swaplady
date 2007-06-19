@@ -16,11 +16,10 @@ class SearchController extends ApplicationController
         $this->logger->info('Populating view parameters');
         $this->view->assign(array(
             'title' => 'Search',
-            'view'  => 'searchNew.phtml'
         ));
         
         $this->logger->info('Rendering application template');
-        echo $this->view->render('applicationTemplate.phtml');
+        $this->render();
     }
     
     public function showAction()
@@ -41,12 +40,11 @@ class SearchController extends ApplicationController
         $this->logger->info('Populating view parameters');
         $this->view->assign(array(
             'title' => 'Search Results',
-            'view'  => 'searchShow.phtml',
             'items' => $items
         ));
         
         $this->logger->info('Rendering application template');
-        echo $this->view->render('applicationTemplate.phtml');
+        $this->render();
         
         $this->logger->exiting();
     }

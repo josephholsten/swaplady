@@ -46,7 +46,7 @@ class MessageController extends ApplicationController
     	$message->save();
     	
     	$item = $conversation->findParentItem();
-    	$owner = $item->findParentOwner();
+    	$owner = $item->findParentUser();
     	$asker = $conversation->findParentUser();
 
 		$mail = new Zend_Mail();
